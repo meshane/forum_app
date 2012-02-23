@@ -214,7 +214,7 @@ describe UsersController do
       
       it "should have a welcome message" do
         post :create, :user => @attr
-        flash[:success].should =~ /welcome to forum lab/i
+        flash[:success].should =~ /welcome to forumlab/i
       end
       
       it "should sign the user in" do
@@ -325,8 +325,8 @@ describe UsersController do
     describe "as an admin user" do
       
       before(:each) do
-        admin = Factory(:user, :email => "admin@example.com", :admin => true)
-        test_sign_in(admin)
+        @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
       end
       
       it "should destroy the user" do
@@ -340,6 +340,12 @@ describe UsersController do
         response.should redirect_to(users_path)
       end
       
+      it "should not be able to destory itself" do
+        lambda do
+          delete :destroy, :id => @admin
+        end.should_not change(User, :count)
+      end
+
     end
     
   end

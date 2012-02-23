@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  before_filter :get_user,     :only => [:edit, :update, :destroy, :show]
   before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user,    :only => :destroy
+  before_filter :admin_user,   :only => :destroy
   
   def index
     @title = "All users"
@@ -9,7 +10,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
     @title = @user.name
   end
   
@@ -22,12 +22,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to Forum Lab"
+      flash[:success] = "Welcome to ForumLab!"
       redirect_to @user
     else
       @title = "Sign up"
-      @user.password = ""
-      @user.password_confirmation = ""
       render 'new'
     end
   end
@@ -35,7 +33,7 @@ class UsersController < ApplicationController
   def edit
     @title = "Edit user"
   end
-
+  
   def update
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated."
@@ -45,26 +43,29 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
+  
   def destroy
-    User.find(params[:id]).destroy
+    @user.destroy
     flash[:success] = "User destroyed."
     redirect_to users_path
   end
   
   private
     
+    def get_user
+      @user = User.find(params[:id])
+    end
+    
     def authenticate
       deny_access unless signed_in?
     end
 
     def correct_user
-      @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
-
+  
     def admin_user
-      redirect_to(root_path) unless current_user.admin?
+      redirect_to(root_path) unless (current_user.admin? && !current_user?(@user))
     end
   
 end
