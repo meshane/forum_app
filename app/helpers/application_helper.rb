@@ -11,8 +11,7 @@ module ApplicationHelper
   end
   
   def logo
-    image_tag("stolen-forum-image.jpeg", :alt => "User Forum", 
-  											 :class => "round")
+    image_tag("ForumLab.png", :class => "round", :alt => "ForumLab")
   end
   
 end
