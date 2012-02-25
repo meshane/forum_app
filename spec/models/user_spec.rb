@@ -161,4 +161,38 @@ describe User do
     
   end
  
+  describe "post associations" do
+    
+    before(:each) do
+      @user = User.create(@attr)
+    end
+
+    it "should have a posts attribute" do
+      @user.should respond_to(:posts)
+    end
+    
+  end
+
+  describe "post associations" do
+
+    before(:each) do
+      @user = User.create(@attr)
+      @mp1 = Factory(:post, :user => @user, :created_at => 1.day.ago)
+      @mp2 = Factory(:post, :user => @user, :created_at => 1.hour.ago)
+    end
+
+    it "should have a posts attribute" do
+      @user.should respond_to(:posts)
+    end
+
+    it "should have a topics attribute" do
+      @user.should respond_to(:topics)
+    end
+    
+    it "should sort the posts in the right order" do
+      @posts = @user.posts.sort_by{ |m| m.created_at }.reverse
+      @posts.should == [@mp2, @mp1]
+    end    
+  end
+  
 end
