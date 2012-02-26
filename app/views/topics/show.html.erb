@@ -1,0 +1,18 @@
+<%# topics.show %>
+<h1><%= @title %></h1>
+<ul class="posts" summary="User posts">
+  <%= render @posts %>
+</ul>
+<% if signed_in? %>
+	<%= form_for(@post) do |f| %>
+		<%= render 'shared/error_messages', :object => f.object  %>
+		<div class="field">
+		    <%= label :post, :content, "Reply" %><br/>
+		    <%= text_area :post, :content %>
+		</div>
+		<%= hidden_field_tag :topic_id, @topic.id %>
+		<div class="actions">
+		  <%= f.submit "Submit" %>
+		</div>
+	<% end %>
+<% end %>

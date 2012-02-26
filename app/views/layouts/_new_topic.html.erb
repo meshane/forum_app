@@ -1,0 +1,17 @@
+<%# layouts/_new_topic %>
+<h1>New Topic</h1>
+
+<%= form_for(@topic) do |t| %>
+	<%= render 'shared/error_messages', :object => t.object  %>
+	<div class="field">
+	    <%= t.label :title %><br />
+	    <%= t.text_field :title %>
+	</div>
+	<div class="field">
+	    <%= label :post, :content, "Post" %><br/>
+	    <%= text_area :post, :content %>
+	</div>
+	<div class="actions">
+	  <%= t.submit "Create New Topic" %>
+	</div>
+<% end %>

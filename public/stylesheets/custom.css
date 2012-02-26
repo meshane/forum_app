@@ -189,3 +189,20 @@ ul.users {
 .users li {
   list-style: none;
 }
+
+
+ul.posts {
+  margin-top: 1em;
+}
+
+.posts li {
+  list-style: none;
+}
+
+ul.topics {
+  margin-top: 1em;
+}
+
+.topics li {
+  list-style: none;
+}

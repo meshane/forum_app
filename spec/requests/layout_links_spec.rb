@@ -31,8 +31,6 @@ describe "LayoutLinks" do
     visit root_path
     click_link "About"
     response.should have_selector('title', :content => "About")
-    click_link "Help"
-    response.should have_selector('title', :content => "Help")
     click_link "Contact"
     response.should have_selector('title', :content => "Contact")
     click_link "ForumLab"
@@ -59,6 +57,12 @@ describe "LayoutLinks" do
       fill_in :email,    :with => @user.email
       fill_in :password, :with => @user.password
       click_button
+    end
+
+    it "should have a new topic link" do
+      visit root_path
+      response.should have_selector("a", :href => new_topic_path,
+                                         :content => "New")
     end
 
     it "should have a signout link" do
