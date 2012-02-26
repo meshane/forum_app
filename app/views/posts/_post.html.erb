@@ -5,20 +5,23 @@
 <li>
 	<table>
 		<tr>
-		  <td class="gravatar">
-		    <% if post.user.admin? %>
-				<%= image_tag("admin.jpeg", :alt => "Admin Logo", :size => "30x30") %>
-			<% else %>
-		    	<%= link_to gravatar_for(post.user), post.user %>
+			<% if post.user %>
+				<td class="gravatar">
+					<% if post.user && post.user.admin? %>
+						<%= image_tag("admin.jpeg", :alt => "Admin Logo", :size => "30x30") %>
+					<% else %>
+					  	<%= link_to gravatar_for(post.user), post.user %>
+					<% end %>
+				</td>
 			<% end %>
-		    
-		  </td>
 		  <td>
-		    <span class="user">
-		      <%= link_to post.user.name, post.user %>
-		    </span>
+			 <% if post.user  %>
+			    <span class="user">
+			      <%= link_to post.user.name, post.user %> |
+			    </span>
+			<% end %>
 		    <span class="timestamp">
-		      | Posted <%= time_ago_in_words(post.created_at) %> ago.
+		      Posted <%= time_ago_in_words(post.created_at) %> ago.
 		    </span>
 		  </td>
 		</tr>

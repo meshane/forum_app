@@ -8,6 +8,7 @@ class PostsController < ApplicationController
     @post.user = current_user
     if @post.save
       current_user.posts << @post
+      @topic.touch(:updated_at)
     end
     redirect_to @topic
     
