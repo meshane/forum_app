@@ -193,6 +193,7 @@ describe User do
       @posts = @user.posts.sort_by{ |m| m.created_at }.reverse
       @posts.should == [@mp2, @mp1]
     end    
+
   end
   
 end

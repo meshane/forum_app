@@ -58,13 +58,13 @@ describe UsersController do
       response.should have_selector("input[name='user[email]'][type='text']")
     end
     
-    it "should have a name field" do
+    it "should have a password field" do
       get :new
       response.should 
             have_selector("input[name='user[password]'][type='password']")
     end
     
-    it "should have a name field" do
+    it "should have a password confirmation field" do
       get :new
       response.should 
             have_selector("input[name='user[password_confirmation]']
@@ -105,7 +105,7 @@ describe UsersController do
       @user = Factory(:user)
     end
     
-    describe "fot non-signed-in users" do
+    describe "for non-signed-in users" do
       
       it "should deny access to 'edit'" do
         get :edit, :id => @user

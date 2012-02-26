@@ -1,0 +1,12 @@
+<%# topics.index %>
+<h1>Welcome to ForumLab</h1>
+<% if !signed_in? %>
+<%= link_to "Sign up now!", new_user_path, :class => "signup_button round" %>
+<% end %><%= will_paginate %>
+<ul class="topics">
+  <%= render @topics %>
+</ul>
+<%= will_paginate %>
+<% if signed_in? %>
+	<%= render 'layouts/new_topic' %>
+<% end %>
