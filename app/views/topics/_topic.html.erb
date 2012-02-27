@@ -3,7 +3,6 @@
 	<div class="post-info clear-block">
 		<div class="posted-on">
 			Topic updated <%= time_ago_in_words(topic.updated_at) %> ago.
-			| <%= pluralize(topic.posts.count, "post")%>
 			<% if signed_in? && current_user.admin? %>
 				| <%= link_to "delete", topic, :method => :delete, :confirm => "You sure?",
 			                            :title => "Delete #{topic.title}" %>
@@ -38,6 +37,9 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="forum-post-panel-count">
+			<%= pluralize(topic.posts.count, "post")%>
 		</div>
 		<div class="forum-post-panel-main clear-block">
 			<div class="post-title">
