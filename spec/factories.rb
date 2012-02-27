@@ -13,6 +13,10 @@ Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end
 
+Factory.sequence :title do |n|
+  "Title #{n}"
+end
+
 Factory.define :topic do |topic|
   topic.title                 "Can I create a topic with Factory"
 end
