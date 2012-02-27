@@ -276,7 +276,7 @@ ul.topics {
   clear:both;
 }
 
-.forum-post-panel-sub {
+.forum-post-panel-sub, .forum-post-panel-count {
   background-attachment:initial;
   background-clip:initial;
   background-color:#EFEFEF;
@@ -306,7 +306,22 @@ ul.topics {
 .forum-post-panel-sub {
   float:left;
   line-height:100%;
-  width:150px;
+  width:100px;
+}
+
+.forum-post-panel-count {
+  float:right;
+  line-height:100%;
+  width:70px;
+  font-size: 200%;
+  min-height:60px;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+  text-align: center;
+  color: red;
+  vertical-align: middle;
 }
 
 .author-pane {
