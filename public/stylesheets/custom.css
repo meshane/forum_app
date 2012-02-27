@@ -346,15 +346,8 @@ ul.topics {
   height:auto !important;
   margin-left:150px;
   min-height:50px;
-}
-
-.forum-post-panel-main .content {
-  padding-top:2px;
-}
-
-.forum-post-panel-main .forum-post-panel-main .content {
-  margin-left:0;
   padding-left:10px;
+  padding-top:2px;
 }
 
 .forum-post-footer {
