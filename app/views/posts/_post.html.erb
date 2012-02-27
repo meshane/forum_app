@@ -1,33 +1,43 @@
 <%# posts partial %>
-<li>
-     <span class="content"><%= post.content %></span>
-</li>
-<li>
-	<table>
-		<tr>
-			<td class="gravatar">
-				<% if post.user %>
-					<% if post.user && post.user.admin? %>
-						<%= image_tag("admin.jpeg", :alt => "Admin Logo", :size => "30x30") %>
-					<% else %>
-					  	<%= link_to gravatar_for(post.user, :size => 30 ), post.user%>
-					<% end %>
-				<% else %>
-					<%= image_tag("questionMark.png", :alt => "Former User", :size => "30x30") %>
-				<% end %>
-			</td>
-		  <td>
-		    <span class="user">
-				<% if post.user  %>
-			    	<%= link_to post.user.name, post.user %> |
-				<% else %>
-					Former User |
-				<% end %>
-		    </span>
-		    <span class="timestamp">
-		      Posted <%= time_ago_in_words(post.created_at) %> ago.
-		    </span>
-		  </td>
-		</tr>
-	</table>
-</li>
+<div class="forum-post clear-block">
+	<div class="post-info clear-block">
+		<div class="posted-on">
+			Posted <%= time_ago_in_words(post.created_at) %> ago.
+		</div>
+	</div>
+	<div class="forum-post-wrapper">
+		<div class="forum-post-panel-sub">
+			<div class="author-pane" >
+				<div class="author-pane-inner">
+					<div class="author-pane-name-status author-pane-section">
+						<div class="author-pane-line author-name">
+							<% if post.user  %>
+						    	<%= link_to post.user.name, post.user %>
+							<% else %>
+								Former User
+							<% end %>
+						</div>
+						<div class="picture">
+							<% if post.user %>
+								<% if post.user && post.user.admin? %>
+									<%= link_to image_tag("admin.jpeg", :alt => "Admin Logo", :size => "60x60") , post.user %>
+								<% else %>
+								  	<%= link_to gravatar_for(post.user, :size => 60 ), post.user %>
+								<% end %>
+							<% else %>
+								<%= image_tag("questionMark.png", :alt => "Former User", :size => "60x60") %>
+							<% end %>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="forum-post-panel-main clear-block">
+			<div class="content">
+				<%= post.content %>
+			</div>
+		</div>
+	</div>
+	<div class="forum-post-footer clear-block">
+	</div>
+</div>
