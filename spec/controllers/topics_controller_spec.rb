@@ -36,12 +36,12 @@ describe TopicsController do
     
     it "should contain the first post" do
       get :show, :id => @topic
-      response.should have_selector("li", :content => @post.content)      
+      response.should have_selector("div", :content => @post.content)      
     end
     
     it "should contain the post creator's name" do
       get :show, :id => @topic
-      response.should have_selector("li", :content => @user.name)      
+      response.should have_selector("div", :content => @user.name)      
     end
     
     describe "for non-signed-in users" do
@@ -190,7 +190,7 @@ describe TopicsController do
       it "should have an element for each of most recent topics" do
         get :index
         @topics[29..31].each do |topic|
-          response.should have_selector("li", :content => topic.title)
+          response.should have_selector("div", :content => topic.title)
         end
       end
 

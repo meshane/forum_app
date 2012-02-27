@@ -1,42 +1,50 @@
 <%# topic partial %>
-<li>
-     <span class="content"><%= link_to topic.title, topic_path(topic.id) %></span>
-</li>
-<li>
-	<table>
-		<tr>
-			<td class="gravatar">
-			<% if topic.posts.first.user %>
-				<% if topic.posts.first.user.admin? %>
-					<%= image_tag("admin.jpeg", :alt => "Admin Logo", :size => "30x30") %>
-				<% else %>
-				   	<%= link_to gravatar_for(topic.posts.first.user , :size => 30 ), 
-												topic.posts.first.user %>
-				<% end %>
-			<% else %>
-				<%= image_tag("questionMark.png", :alt => "Former User", :size => "30x30") %>
-			<% end %>	    
-			</td>
-			<td>
-				<span class="user">
-					<% if topic.posts.first.user %>
-					   	<%= link_to topic.posts.first.user.name, topic.posts.first.user %> |
-					<% else %>
-						Former User |
-					<% end %>
-				</span>
-				<span class="timestamp">
-					Updated <%= time_ago_in_words(topic.updated_at) %> ago.
-				</span>
-				<span class="count">
-					| <%= pluralize(topic.posts.count, "post")%>
-				</span>
-				<% if signed_in? && current_user.admin? %>
-					| <%= link_to "delete", topic, :method => :delete, :confirm => "You sure?",
-				                            :title => "Delete #{topic.title}" %>
-				<% end %>
-
-			</td>
-		</tr>
-	</table>
-</li>
+<div class="forum-post clear-block">
+	<div class="post-info clear-block">
+		<div class="posted-on">
+			Topic updated <%= time_ago_in_words(topic.updated_at) %> ago.
+			| <%= pluralize(topic.posts.count, "post")%>
+			<% if signed_in? && current_user.admin? %>
+				| <%= link_to "delete", topic, :method => :delete, :confirm => "You sure?",
+			                            :title => "Delete #{topic.title}" %>
+			<% end %>
+		</div>
+	</div>
+	<div class="forum-post-wrapper">
+		<div class="forum-post-panel-sub">
+			<div class="author-pane" >
+				<div class="author-pane-inner">
+					<div class="author-pane-name-status author-pane-section">
+						<div class="author-pane-line author-name">
+							<% if topic.posts.first.user %>
+							   	<%= link_to topic.posts.first.user.name, topic.posts.first.user %>
+							<% else %>
+								Former User
+							<% end %>
+						</div>
+						<div class="picture">
+							<% if topic.posts.first.user %>
+								<% if topic.posts.first.user.admin? %>
+									<%= link_to image_tag("admin.jpeg", :alt => "Admin Logo", :size => "30x30"), 
+																topic.posts.first.user %>
+								<% else %>
+								   	<%= link_to gravatar_for(topic.posts.first.user , :size => 30 ), 
+																topic.posts.first.user %>
+								<% end %>
+							<% else %>
+								<%= image_tag("questionMark.png", :alt => "Former User", :size => "30x30") %>
+							<% end %>	    
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="forum-post-panel-main clear-block">
+			<div class="post-title">
+				<h3><%= link_to topic.title, topic_path(topic.id) %></h3>
+			</div>
+		</div>
+	</div>
+	<div class="forum-post-footer clear-block">
+	</div>
+</div>
